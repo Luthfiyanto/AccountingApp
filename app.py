@@ -1,6 +1,7 @@
 import streamlit as st
 from database import initialize_database, seed_database
 # from models.auth import logout
+from models.accounts import get_all_accounts
 from page import auth
 
 # Initialize the database
@@ -15,20 +16,11 @@ if 'logged_in' not in st.session_state:
     st.session_state.logged_in = False
     st.session_state.user = None
 
-if "transactions" not in st.session_state:
-    st.session_state["transactions"] = []
 
 if "accounts" not in st.session_state:
-    st.session_state["accounts"] = {
-        "Kas": 0,
-        "Persediaan": 0,
-        "Pendapatan": 0,
-        "Penjualan": 0,
-        "HPP": 0,
-        "Beban": 0,
-        "Beban listrik, air, sampah": 0,
-        "Beban gaji": 0
-    }
+    st.session_state["accounts"] = []
+    account_data = get_all_accounts()
+    st.session_state["accounts"] = [row [1] for row in account_data]
 
 def logout():
     st.session_state.logged_in = False

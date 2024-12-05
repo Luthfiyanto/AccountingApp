@@ -12,7 +12,7 @@ venv/
 *.sqlite3
 
 # CSV or other data files (if not meant to be versioned)
-*.csv
+# *.csv
 *.tsv
 
 # Jupyter Notebook checkpoints

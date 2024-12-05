@@ -26,12 +26,19 @@ def initialize_database():
     
     # Create table for transactions
     cursor.execute('''CREATE TABLE IF NOT EXISTS transactions (
-                    id INTEGER PRIMARY KEY, 
-                    account_name TEXT, 
-                    debit REAL,
-                    credit REAL, 
+                    id INTEGER PRIMARY KEY AUTOINCREMENT, 
                     date TEXT, 
                     description TEXT)''')
+
+    # Create table for transaction_detail
+    cursor.execute('''CREATE TABLE IF NOT EXISTS transactions_detail (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    transaction_id INTEGER,
+                    account_type TEXT CHECK(account_type IN ('debit','credit')),
+                    account,
+                    amount REAL,
+                    FOREIGN KEY (transaction_id) REFERENCES transactions(id)
+                    )''')
     
     # Create table for inventory
     cursor.execute('''CREATE TABLE IF NOT EXISTS inventory (
@@ -59,7 +66,6 @@ def seed_database():
     # read file csv
     csv_file = Path("inventory.csv")
     seed_inventory = csv_to_array(csv_file)
-    print(seed_inventory)
 
     seed_users = [
         (10002,"admin", hash_password("admin123")),
@@ -75,15 +81,6 @@ def seed_database():
         (6202,"Beban Gaji", 0),
     ]
 
-    seed_transactions = [
-        ("Kas", 1000000, 0, "2021-01-01", "Modal awal"),
-        ("Perlengkapan", 200000, 0, "2021-01-01", "Modal awal"),
-        ("Peralatan", 1000000, 0, "2021-01-01", "Modal awal"),
-        ("Modal", 0, 2000000, "2021-01-01", "Modal awal"),
-        ("Kas", 0, 500000, "2021-01-01", "Utang awal"),
-        ("Utang", 500000, 0, "2021-01-01", "Utang awal")
-    ]
-
     cursor.execute("SELECT COUNT(*) FROM inventory")
     if(cursor.fetchone()[0] == 0):
         cursor.executemany("INSERT INTO inventory VALUES (?, ?, ?, ?, ?)", seed_inventory)
@@ -95,10 +92,6 @@ def seed_database():
     cursor.execute("SELECT COUNT(*) FROM accounts")
     if(cursor.fetchone()[0] == 0):
         cursor.executemany("INSERT INTO accounts VALUES (?, ?, ?)", seed_accounts)
-
-    cursor.execute("SELECT COUNT(*) FROM transactions")
-    if(cursor.fetchone()[0] == 0):
-        cursor.executemany("INSERT INTO transactions VALUES (NULL, ?, ?, ?, ?, ?)", seed_transactions)
     
     conn.commit()
     conn.close()
