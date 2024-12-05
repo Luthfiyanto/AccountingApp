@@ -7,7 +7,7 @@ if "inventory" not in st.session_state:
     st.session_state["inventory"] = []
     st.session_state["inventory"] = get_inventory()
 
-st.subheader("Data Persediaan")
+st.subheader("Inventory")
 
 tab_display, tab_edit = st.tabs(['Overview', 'Edit'])
 
@@ -49,6 +49,19 @@ with tab_edit:
           st.success("Data berhasil disimpan.")
           
      # # Menampilkan tabel data persediaan
+     header_col1, header_col2, header_col3, header_col4, header_col5, header_col6 = st.columns(6)
+     with header_col1:
+          st.write("ID")
+     with header_col2:
+          st.write("Nama")
+     with header_col3:
+          st.write("Kategori")
+     with header_col4:
+          st.write("Stok")
+     with header_col5:
+          st.write("Harga")
+     with header_col6:
+          st.write("Aksi")
      for i, row in inventory_df.iterrows():
           col1, col2, col3, col4, col5, col6 = st.columns(6)
           with col1:

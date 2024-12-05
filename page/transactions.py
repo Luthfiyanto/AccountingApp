@@ -9,7 +9,7 @@ if "transactions" not in st.session_state:
     st.session_state["transactions"] = get_all_transactions()
 
 # def TransactionPage():
-st.title("Jurnal Umum")
+st.subheader("Jurnal Umum")
 
         # Form untuk menambahkan transaksi
 col1, col2 = st.columns(2)
