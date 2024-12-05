@@ -9,7 +9,7 @@ initialize_database()
 seed_database()
 
 # Streamlit app
-st.title('Accounting App')
+st.title('Sistem Informasi Akuntansi')
 
 # Initialize the session state
 if 'logged_in' not in st.session_state:

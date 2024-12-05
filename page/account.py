@@ -7,7 +7,8 @@ if "accounts" not in st.session_state:
     
 st.subheader("Manage Account")
 
-account_pd = pd.DataFrame(st.session_state["account"], columns=["ID", "Akun"])
+# account_pd = pd.DataFrame(st.session_state["account"], columns=["ID", "Akun"])
+account_pd = pd.DataFrame(get_all_accounts(), columns=["ID", "Akun"])
 
 # Input akun baru
 col1, col2 = st.columns(2)

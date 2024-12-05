@@ -79,6 +79,3 @@ with tab_edit:
                if st.button(f"Hapus", key=f"hapus_{row[0]}"):
                     delete_inventory(row[0])
                     st.session_state["inventory"] = get_inventory()
-
-     else:
-          st.write("Tidak ada data persediaan.")

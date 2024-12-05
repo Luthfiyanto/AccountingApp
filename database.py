@@ -21,8 +21,8 @@ def initialize_database():
     # Create table for accounts
     cursor.execute('''CREATE TABLE IF NOT EXISTS accounts (
                     id INTEGER PRIMARY KEY, 
-                    account_name TEXT, 
-                    balance REAL)''')
+                    account_name TEXT
+                    )''')
     
     # Create table for transactions
     cursor.execute('''CREATE TABLE IF NOT EXISTS transactions (
@@ -36,7 +36,7 @@ def initialize_database():
                     transaction_id INTEGER,
                     account_type TEXT CHECK(account_type IN ('debit','credit')),
                     account,
-                    amount REAL,
+                    amount INTEGER,
                     FOREIGN KEY (transaction_id) REFERENCES transactions(id)
                     )''')
     
@@ -45,8 +45,8 @@ def initialize_database():
                     id STRING PRIMARY KEY, 
                     nama_barang TEXT, 
                     unit INTEGER, 
-                    harga_satuan REAL, 
-                    jumlah REAL
+                    harga_satuan INTEGER, 
+                    jumlah INTEGER
                     )''')
     conn.commit()
     conn.close()
@@ -73,12 +73,12 @@ def seed_database():
     ]
 
     seed_accounts = [
-        (1101,"Kas", 0),
-        (1102,"Persediaan", 0),
-        (4101,"Penjualan", 0),
-        (5101,"Harga Pokok Penjualan", 0),
-        (6201,"Beban Listrik, Air, dan Sampah", 0),
-        (6202,"Beban Gaji", 0),
+        (1101,"Kas"),
+        (1102,"Persediaan"),
+        (4101,"Penjualan"),
+        (5101,"Harga Pokok Penjualan"),
+        (6201,"Beban Listrik, Air, dan Sampah"),
+        (6202,"Beban Gaji"),
     ]
 
     cursor.execute("SELECT COUNT(*) FROM inventory")
@@ -91,7 +91,7 @@ def seed_database():
     
     cursor.execute("SELECT COUNT(*) FROM accounts")
     if(cursor.fetchone()[0] == 0):
-        cursor.executemany("INSERT INTO accounts VALUES (?, ?, ?)", seed_accounts)
+        cursor.executemany("INSERT INTO accounts VALUES (?, ?)", seed_accounts)
     
     conn.commit()
     conn.close()
