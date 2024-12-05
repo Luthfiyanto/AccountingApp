@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 from models.accounts import get_all_accounts, delete_account, create_account
 
+if "accounts" not in st.session_state:
+    st.session_state["accounts"] = get_all_accounts()
+    
 st.subheader("Manage Account")
 
 account_pd = pd.DataFrame(st.session_state["account"], columns=["ID", "Akun"])
