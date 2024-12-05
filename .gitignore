@@ -1,0 +1,42 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+env/
+venv/
+
+# SQLite database files
+*.db
+*.sqlite3
+
+# CSV or other data files (if not meant to be versioned)
+*.csv
+*.tsv
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Logs and debug files
+*.log
+*.out
+*.err
+
+# Streamlit temporary files
+.streamlit/
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Python cache and egg files
+*.egg-info/
+.eggs/
+*.egg
+
+# Configurations and secrets
+*.ini
+*.env
+*.json
