@@ -41,16 +41,14 @@ if st.button("Simpan Transaksi"):
             credit_data = list(zip(credit_accounts,credit_amounts))
 
             if total_debit == total_credit:
-                # Simpan transaksi ke dalam sesi
+            # Simpan transaksi ke dalam sesi
                 save_transactions(date, description, debit_data, credit_data)
-                print("date",date, "deskripsi",description, "debits", debit_data, "credits", credit_data)
-            st.success("Transaksi berhasil disimpan.")
-            st.rerun()
+                st.success("Transaksi berhasil disimpan.")
+                st.session_state["transactions"] = get_all_transactions()
 else:
             st.error("Total Jumlah Debit dan Kredit harus sama.")
 
         # Tabel Jurnal umum
 st.write("### Daftar Transaksi")
 transaction_df = pd.DataFrame(st.session_state["transactions"], columns=["ID","ID Transaksi", "Tanggal", "Deskripsi", "Akun", "Debit","Kredit"])
-
 st.write(transaction_df)
