@@ -10,7 +10,7 @@ def create_account(user_id, name):
 def get_all_accounts():
     conn = create_connection()
     cursor = conn.cursor()
-    cursor.execute('''SELECT id, account_name FROM accounts ORDER BY account_name''')
+    cursor.execute('''SELECT id, account_name FROM accounts''')
     accounts = cursor.fetchall()
     conn.close()
     return accounts
