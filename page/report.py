@@ -3,7 +3,7 @@ import pandas as pd
 from models.accounts import get_all_accounts
 from models.transactions import get_all_transactions
 # def ReportPage():
-st.title("Laporan Laba Rugi")
+st.subheader("Laporan Laba Rugi")
 
 accounts_df = pd.DataFrame(get_all_accounts(), columns=["Kode", "Akun"])
 
