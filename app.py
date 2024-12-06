@@ -27,16 +27,13 @@ def logout():
     st.session_state.user = None
     st.rerun()
 
-def generalLedger():
-    st.title("General Ledger")
-
 if not st.session_state.logged_in:
     auth.AuthPage()
 else:
     authPage = st.Page(logout, title='Auth', icon=':material/login:')
     inventoryPage = st.Page('page/inventory.py', title='Inventory', icon=':material/store:', default=True)
     transactionPage = st.Page('page/transactions.py', title='Transaction', icon=':material/receipt_long:')
-    generalLedgerPage = st.Page(generalLedger, title="General Ledger", icon=":material/book:")
+    generalLedgerPage = st.Page('page/ledger.py', title="General Ledger", icon=":material/book:")
     trialBalancePage = st.Page('page/balance.py', title="Trial Balance", icon=":material/balance:")
     reportPage = st.Page('page/report.py', title='Report', icon=':material/insights:')
     logoutPage = st.Page(logout, title='Logout', icon=':material/logout:')

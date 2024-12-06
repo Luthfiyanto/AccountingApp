@@ -8,6 +8,7 @@ if "transactions" not in st.session_state:
     st.session_state["transactions"] = []
     st.session_state["transactions"] = get_all_transactions()
 
+st.session_state["transactions"] = get_all_transactions()
 # def TransactionPage():
 st.subheader("Jurnal Umum")
 
@@ -47,4 +48,17 @@ else:
         # Tabel Jurnal umum
 st.write("### Daftar Transaksi")
 transaction_df = pd.DataFrame(st.session_state["transactions"], columns=["ID","ID Transaksi", "Tanggal", "Deskripsi", "Akun", "Debit","Kredit"])
-st.write(transaction_df)
+
+total_debit = transaction_df["Debit"].sum()
+total_credit = transaction_df["Kredit"].sum()
+total_balance = total_debit - total_credit
+
+summary = {
+    "Total Debit": total_debit,
+    "Total Kredit": total_credit,
+    "Total Balance": total_balance
+}
+
+st.table(transaction_df)
+
+st.table(summary)
