@@ -1,7 +1,7 @@
 import streamlit as st
 import datetime
 import pandas as pd
-from models.transactions import get_all_transactions, save_transactions, get_transactions, get_transaction_detail, update_transaction
+from models.transactions import get_all_transactions, save_transactions, get_transactions, get_transaction_detail, update_transaction, delete_transaction
 
 # inisialisasi state
 if "transactions" not in st.session_state:
@@ -12,7 +12,7 @@ st.session_state["transactions"] = get_all_transactions()
 # def TransactionPage():
 st.subheader("Jurnal Umum")
 
-tab_add, tab_edit = st.tabs(["Add Transaction", "Edit Transaction"])
+tab_add, tab_edit, tab_delete = st.tabs(["Add Transaction", "Edit Transaction", "Delete Transaction"])
 
 with tab_add:
     # Form untuk menambahkan transaksi
@@ -70,7 +70,7 @@ with tab_add:
 with tab_edit:
     trans_data = pd.DataFrame(get_transactions(), columns=["ID Transaksi", "Tanggal", "Deskripsi"])
     transaction_id = st.selectbox("Pilih Transaksi", options=(trans_data["ID Transaksi"]))
-    
+
     if transaction_id:
         recent_t_detail = get_transaction_detail(transaction_id)
 
@@ -105,3 +105,20 @@ with tab_edit:
             else:
                 st.error("Total Jumlah Debit dan Kredit harus sama.")
     
+with tab_delete:
+    trans_data = pd.DataFrame(get_transactions(), columns=["ID Transaksi", "Tanggal", "Deskripsi"])
+    transaction_id = st.selectbox("Pilih Transaksi yang akan dihapus", options=trans_data["ID Transaksi"])
+
+    if transaction_id:
+        selected_transaction = trans_data.loc[trans_data["ID Transaksi"] == transaction_id]
+        detail_transaction = get_transaction_detail(transaction_id)
+        st.write("### Transaksi")
+        st.table(selected_transaction)
+        st.write("### Detail Transaksi")
+        st.table(detail_transaction)
+
+        if st.button("Hapus Transaksi"):
+            delete_transaction(transaction_id)
+            st.success("Transaksi berhasil dihapus.")
+            st.session_state["transactions"] = get_all_transactions()
+            st.rerun()

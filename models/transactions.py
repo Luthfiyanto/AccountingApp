@@ -124,6 +124,7 @@ def update_transaction(transaction_id, date, description, debit_accounts, credit
 def delete_transaction(transaction_id):
     conn = create_connection()
     cursor = conn.cursor()
+    cursor.execute('''DELETE FROM transactions_detail WHERE id = ?''', (transaction_id,))
     cursor.execute('''DELETE FROM transactions WHERE id = ?''', (transaction_id,))
     conn.commit()
     conn.close()
