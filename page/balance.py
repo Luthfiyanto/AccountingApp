@@ -11,7 +11,6 @@ summary = groupedData.agg(
   Debit=("Debit", "sum"),
   Kredit=("Kredit","sum")
 )
-summary["Balance"] = summary["Debit"] - summary["Kredit"]
 
 st.table(summary)
 
