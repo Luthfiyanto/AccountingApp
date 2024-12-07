@@ -47,8 +47,8 @@ laba_bersih = laba_kotor - beban_operasional
 summary = {
         "Pendapatan": pendapatan,
         "HPP": hpp,
-        "Beban Operasional": beban_operasional,
         "Laba Kotor": laba_kotor,
+        "Beban Operasional": beban_operasional,
         "Laba Bersih": laba_bersih
 }
 

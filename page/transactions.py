@@ -111,7 +111,7 @@ with tab_delete:
 
     if transaction_id:
         selected_transaction = trans_data.loc[trans_data["ID Transaksi"] == transaction_id]
-        detail_transaction = get_transaction_detail(transaction_id)
+        detail_transaction = pd.DataFrame(get_transaction_detail(transaction_id), columns=["ID", "ID Transaksi", "Tipe", "Akun", "Jumlah"])
         st.write("### Transaksi")
         st.table(selected_transaction)
         st.write("### Detail Transaksi")

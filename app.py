@@ -31,19 +31,19 @@ if not st.session_state.logged_in:
     auth.AuthPage()
 else:
     authPage = st.Page(logout, title='Auth', icon=':material/login:')
-    inventoryPage = st.Page('page/inventory.py', title='Inventory', icon=':material/store:', default=True)
-    transactionPage = st.Page('page/transactions.py', title='Transaction', icon=':material/receipt_long:')
-    generalLedgerPage = st.Page('page/ledger.py', title="General Ledger", icon=":material/book:")
-    trialBalancePage = st.Page('page/balance.py', title="Trial Balance", icon=":material/balance:")
-    reportPage = st.Page('page/report.py', title='Report', icon=':material/insights:')
+    inventoryPage = st.Page('page/inventory.py', title='Persediaan', icon=':material/store:', default=True)
+    transactionPage = st.Page('page/transactions.py', title='Jurnal Umum', icon=':material/receipt_long:')
+    generalLedgerPage = st.Page('page/ledger.py', title="Buku Besar", icon=":material/book:")
+    trialBalancePage = st.Page('page/balance.py', title="Neraca Saldo", icon=":material/balance:")
+    reportPage = st.Page('page/report.py', title='Laporan Laba', icon=':material/insights:')
     logoutPage = st.Page(logout, title='Logout', icon=':material/logout:')
-    accountPage = st.Page('page/account.py', title="Setting", icon=':material/settings:')
+    accountPage = st.Page('page/account.py', title="Akun", icon=':material/settings:')
 
     pages = [inventoryPage, transactionPage,generalLedgerPage, trialBalancePage, reportPage, accountPage,logoutPage]
 
     if st.session_state.user:
         pg = st.navigation(pages)
-        st.write(f'Welcome back, {st.session_state.user[1]}!')
+        st.write(f'Selamat Datang, {st.session_state.user[1]}!')
         pg.run()
     else:
         authPage = st.Page('page/auth.py', title='Auth', icon=':material/login:')
