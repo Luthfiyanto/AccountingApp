@@ -15,7 +15,8 @@ summary["balance"] = summary["total_debit"] - summary["total_credit"]
 
 for account, group in groupedData:
   st.subheader(account)
-  st.table(group)
+  group_reset = group.reset_index(drop=True)
+  st.table(group_reset.style.hide(axis="index"))
 
 st.subheader("Ringkasan")
 st.table(summary)
