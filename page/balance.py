@@ -19,9 +19,17 @@ total_debit = transactions["Debit"].sum()
 total_credit = transactions["Kredit"].sum()
 total_balance = abs(total_debit - total_credit)
 
+# Filter transactions sales & non sales
+sales_transactions = transactions[transactions["Akun"] == "Penjualan"]
+non_sales_transactions = transactions[transactions["Akun"] != "Penjualan"]
+
+# Calculate total sales & non sales
+total_sales_credit = sales_transactions["Kredit"].sum()
+total_non_sales_debit = non_sales_transactions["Debit"].sum()
+
 summary = {
-    "Total Debit": total_debit,
-    "Total Kredit": total_credit,
+    "Total Debit": total_non_sales_debit,
+    "Total Kredit": total_sales_credit,
     "Total Balance": total_balance
 }
 
