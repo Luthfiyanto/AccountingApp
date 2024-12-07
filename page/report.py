@@ -32,15 +32,10 @@ summary_kredit = transaction_df.groupby("category")["Kredit"].sum().reset_index(
 
 pendapatan1 = summary_debit.loc[summary_debit["category"] == "Pendapatan", "Debit"].sum()
 pendapatan2 = summary_kredit.loc[summary_kredit["category"] == "Pendapatan", "Kredit"].sum()
-pendapatan = pendapatan1 - pendapatan2
+pendapatan = pendapatan2 - pendapatan1
 
 hpp = summary_debit.loc[summary_debit["category"] == "HPP", "Debit"].sum()
-# hpp2 = summary_kredit.loc[summary_kredit["category"] == "HPP", "Kredit"].sum()
-# hpp = hpp1 - hpp2
-
 beban_operasional = summary_debit.loc[summary_debit["category"] == "Beban Operasional", "Debit"].sum()
-# beban_operasional2 = summary_kredit.loc[summary_kredit["category"] == "Beban Operasional", "Kredit"].sum()
-# beban_operasional = beban_operasional1 - beban_operasional2
 
 laba_kotor = pendapatan - hpp
 laba_bersih = laba_kotor - beban_operasional

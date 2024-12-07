@@ -35,7 +35,7 @@ else:
     transactionPage = st.Page('page/transactions.py', title='Jurnal Umum', icon=':material/receipt_long:')
     generalLedgerPage = st.Page('page/ledger.py', title="Buku Besar", icon=":material/book:")
     trialBalancePage = st.Page('page/balance.py', title="Neraca Saldo", icon=":material/balance:")
-    reportPage = st.Page('page/report.py', title='Laporan Laba', icon=':material/insights:')
+    reportPage = st.Page('page/report.py', title='Laporan Laba Rugi', icon=':material/insights:')
     logoutPage = st.Page(logout, title='Logout', icon=':material/logout:')
     accountPage = st.Page('page/account.py', title="Akun", icon=':material/settings:')
 
