@@ -54,7 +54,7 @@ with tab_add:
 
     total_debit = transaction_df["Debit"].sum()
     total_credit = transaction_df["Kredit"].sum()
-    total_balance = total_debit - total_credit
+    total_balance = abs(total_debit - total_credit)
 
     summary = {
         "Total Debit": total_debit,

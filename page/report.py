@@ -5,6 +5,7 @@ from models.transactions import get_all_transactions
 # def ReportPage():
 st.subheader("Laporan Laba Rugi")
 
+st.session_state["transactions"] = get_all_transactions()
 accounts_df = pd.DataFrame(get_all_accounts(), columns=["Kode", "Akun"])
 
 def classify_account(code):
@@ -33,13 +34,13 @@ pendapatan1 = summary_debit.loc[summary_debit["category"] == "Pendapatan", "Debi
 pendapatan2 = summary_kredit.loc[summary_kredit["category"] == "Pendapatan", "Kredit"].sum()
 pendapatan = pendapatan1 - pendapatan2
 
-hpp1 = summary_debit.loc[summary_debit["category"] == "HPP", "Debit"].sum()
-hpp2 = summary_kredit.loc[summary_kredit["category"] == "HPP", "Kredit"].sum()
-hpp = hpp1 - hpp2
+hpp = summary_debit.loc[summary_debit["category"] == "HPP", "Debit"].sum()
+# hpp2 = summary_kredit.loc[summary_kredit["category"] == "HPP", "Kredit"].sum()
+# hpp = hpp1 - hpp2
 
-beban_operasional1 = summary_debit.loc[summary_debit["category"] == "Beban Operasional", "Debit"].sum()
-beban_operasional2 = summary_kredit.loc[summary_kredit["category"] == "Beban Operasional", "Kredit"].sum()
-beban_operasional = beban_operasional1 - beban_operasional2
+beban_operasional = summary_debit.loc[summary_debit["category"] == "Beban Operasional", "Debit"].sum()
+# beban_operasional2 = summary_kredit.loc[summary_kredit["category"] == "Beban Operasional", "Kredit"].sum()
+# beban_operasional = beban_operasional1 - beban_operasional2
 
 laba_kotor = pendapatan - hpp
 laba_bersih = laba_kotor - beban_operasional

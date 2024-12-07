@@ -11,7 +11,7 @@ summary = groupedData.agg(
   Debit=("Debit", "sum"),
   Kredit=("Kredit","sum")
 )
-summary["Balance"] = summary["Debit"] - summary["Kredit"]
+summary["Balance"] = (summary["Debit"] - summary["Kredit"]).abs()
 
 for account, group in groupedData:
   st.subheader(account)

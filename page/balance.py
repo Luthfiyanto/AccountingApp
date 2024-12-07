@@ -11,12 +11,13 @@ summary = groupedData.agg(
   Debit=("Debit", "sum"),
   Kredit=("Kredit","sum")
 )
+summary["Balance"] = (summary["Debit"] - summary["Kredit"]).abs()
 
 st.table(summary)
 
 total_debit = transactions["Debit"].sum()
 total_credit = transactions["Kredit"].sum()
-total_balance = total_debit - total_credit
+total_balance = abs(total_debit - total_credit)
 
 summary = {
     "Total Debit": total_debit,
