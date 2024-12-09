@@ -25,10 +25,17 @@ non_sales_transactions = transactions[transactions["Akun"] != "Penjualan"]
 
 # Calculate total sales & non sales
 total_sales_credit = sales_transactions["Kredit"].sum()
-total_non_sales_debit = non_sales_transactions["Debit"].sum()
+
+groupedData_non_sales = non_sales_transactions.groupby("Akun")
+summary_non_sales = groupedData_non_sales.agg(
+  Debit=("Debit", "sum"),
+  Kredit=("Kredit","sum")
+)
+summary_non_sales["Balance"] = (summary_non_sales["Debit"] - summary_non_sales["Kredit"]).abs()
+
 
 summary = {
-    "Total Debit": total_non_sales_debit,
+    "Total Debit": summary_non_sales["Balance"].sum(),
     "Total Kredit": total_sales_credit,
     "Total Balance": total_balance
 }
